@@ -13,6 +13,7 @@ board.on("ready", () => {
     pin: 1,
   });
   motor.stop();
+  board.on("exit", () => { motor.stop(); });
 
   var speed = 0;
 
@@ -21,15 +22,19 @@ board.on("ready", () => {
   }
 
   function newDirection() {
-    var newSpeed = random(0.005, 0.15);
+    const newSpeed = (speed > 0) ? (
+      // reverse
+      -1 * random(0.005, 0.15)
+    ) : (
+      // forward
+      random(0.005, 0.15)
+    );
     // running at 0.15 for 5s gives us 50cm of length, 0.15 * 5 * x = 50cm, so x is about 67
-    var timeToRun = Math.round(newSpeed * 67);
-    if (speed > 0) {
-      newSpeed *= -1;
-    }
+    // but that's unmeasured, so adjusting from that guess
+    const timeToRun = Math.round(Math.abs(newSpeed) * 25);
     speed = newSpeed;
 
-    console.log(`running at ${speed} for ${timeToRun}ms`);
+    console.log(`running at ${speed} for ${timeToRun}s`);
     setTimeout(newDirection, timeToRun * 1e3);
     if (speed >= 0) {
       motor.cw(speed);
