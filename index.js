@@ -31,7 +31,7 @@ board.on("ready", () => {
       console.log(`stopping for ${timeToRun}s`);
       motor.stop();
     } else {
-      const newSpeed = (speed > 0) ? (
+      const newSpeed = (speedHistory[1] > 0) ? (
         // reverse
         -1 * random(0.005, 0.15)
       ) : (
@@ -43,9 +43,9 @@ board.on("ready", () => {
       timeToRun = Math.round(Math.abs(newSpeed) * 25);
       speedHistory.unshift(newSpeed);
 
-      console.log(`running at ${speed} for ${timeToRun}s`);
+      console.log(`running at ${newSpeed} for ${timeToRun}s`);
       // johnny-five handles the direction for us
-      motor.cw(speed);
+      motor.cw(newSpeed);
     }
     setTimeout(newDirection, timeToRun * 1e3);
     while (speedHistory.length > 2) {
