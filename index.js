@@ -36,11 +36,8 @@ board.on("ready", () => {
 
     console.log(`running at ${speed} for ${timeToRun}s`);
     setTimeout(newDirection, timeToRun * 1e3);
-    if (speed >= 0) {
-      motor.cw(speed);
-    } else {
-      motor.ccw(speed);
-    }
+    // johnny-five handles the direction for us
+    motor.cw(speed);
   }
 
   setTimeout(newDirection, 3e3);
