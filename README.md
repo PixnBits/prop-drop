@@ -1,6 +1,6 @@
 # Prop Drop
 
-A small, one-day project for running a continuous servo to control the height of a spider.
+A small, one-day project for running a continuous servo to control the height of [a spider](https://www.homedepot.com/p/Home-Accents-Holiday-10-in-Skeleton-Spider-8342-10571BL/308468102).
 
 # Hardware
 
